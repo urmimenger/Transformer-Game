@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    'Transformers Battle'
+  </h1>
+  <section>
+    <h1> Enter the details below:</h1>
+    <form (ngSubmit)="startBattle()" #myForm="ngForm">
+      <textarea [(ngModel)]="battleInput" ng-trim="false" required name="input" rows="10" cols="45" placeholder="(Name, Team, Strength, Intelligence, Speed, Endurance, Rank, Courage, FirePower,
+      Skill)"></textarea>
+      <br>
+      <button type="submit" name="btn" class="btnbtn-default" [disabled]="!myForm.form.valid">Start Battle</button>
+    </form>
+    <div *ngIf="battleData.numberOfBattles!=undefined && battleData.numberOfBattles!='' && battleData.numberOfBattles>=0">
+      <p id="battle">{{ battleData.numberOfBattles }} &nbsp; battle(s)</p>
+      <p *ngIf="battleData.finalWinner != undefined && battleData.finalWinner != '' ">Winning team ({{battleData.defeated=='Decepticons'?'Autobots':'Decepticons'}}) :
+        <span class="winner" *ngIf="battleData.finalWinner != undefined">{{ battleData.finalWinner.name }} </span>
+      </p>
+      <p *ngIf="battleData.defeated=='Decepticons'||battleData.defeated== 'Autobots'">Survivors from the losing team ({{battleData.defeated}}) :
+        <span class="survivor" *ngFor="let survivor of battleData.lefts">{{ survivor.name }}. </span>
+      </p>
+    </div>
+  </section>
